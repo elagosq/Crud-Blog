@@ -1,12 +1,10 @@
 import React, { useContext } from 'react';
-import { View,Text,StyleSheet,FlatList,TouchableOpacity } from 'react-native';
+import { View,Text,StyleSheet,FlatList,TouchableOpacity,Platform } from 'react-native';
 import { Context as BlogContext } from '../context/BlogContext';
 import Feather from 'react-native-vector-icons/Feather';
 
 const IndexScreen = ({ navigation }) => {
 	const { state,deleteBlogPost }  = useContext(BlogContext);
-    
-	console.log(state);
 
 	return (  
 	 <View>
@@ -43,6 +41,7 @@ const styles = StyleSheet.create({
 	fontSize:18
   },
   icon:{
+	color: Platform.OS === 'ios' ? 'blue' : 'black',
 	fontSize:24
   }	
 });

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity,Platform } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider as BlogProvider } from './src/context/BlogContext';
@@ -26,7 +26,7 @@ function App(){
           options={({ navigation }) => ({
             headerRight: () =>  (
             <TouchableOpacity onPress={() => navigation.navigate('Create')}>
-              <Feather name="plus" size={30} />
+              <Feather name="plus" size={30} style={styles.icon}/>
             </TouchableOpacity>
             )
           })}
@@ -38,7 +38,7 @@ function App(){
             title : route.params.name,
             headerRight: () =>  (
             <TouchableOpacity onPress={() => navigation.navigate('Edit',{id : route.params.id})}>
-              <EvilIcons name="pencil" size={35} />
+              <EvilIcons name="pencil" size={30} style={styles.icon} />
             </TouchableOpacity>
             )
           })}
@@ -49,6 +49,13 @@ function App(){
     </NavigationContainer>
   );
 }
+
+
+const styles = StyleSheet.create({
+   icon:{
+    color: Platform.OS === 'ios' ? 'green' : 'black'
+   }  
+});
 
 export default () => {
   return (

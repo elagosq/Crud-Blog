@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import { View,Text,StyleSheet, TextInput, Button } from 'react-native';
+import { View,Text,StyleSheet, TextInput, Pressable } from 'react-native';
 
 const BlogPostForm = ({ action,onSubmit,initialValues }) => {
 	const [title,setTitle] = useState(initialValues.title);
@@ -19,11 +19,20 @@ const BlogPostForm = ({ action,onSubmit,initialValues }) => {
 			 style={styles.input} 
 			 value={content} 
 			 onChangeText={(text) => setContent(text)} />
-		  <Button 
-			title={`${titleButton} Blog Post`}
-			onPress={() => onSubmit(title,content)}
-		   />   
-		</View>
+		   <View style={styles.containerButton}>
+			<Pressable
+		     style={({pressed}) => [
+			   {
+				 backgroundColor : pressed ? 'green' : 'blue'   	
+			   },
+			   styles.button
+			 ]}
+			 onPress={() => onSubmit(title,content)}
+		    >
+			<Text style={styles.titleButton}>{`${titleButton} Blog Post`}</Text>
+		   </Pressable>
+		 </View>	 
+	   </View>
 	);
 }
 
@@ -47,9 +56,27 @@ const styles = StyleSheet.create({
 	  borderColor:'black'
 	},
 	label:{
-	  fontSize:20,
+	  fontSize:16,
 	  marginBottom:5,
 	  marginLeft:5
+	},
+
+	containerButton:{
+      alignItems:'center'
+	},
+	button:{
+	  marginVertical:20,
+      borderRadius:8,
+	  padding:6,
+	  height:50,
+	  width:'70%',
+	  justifyContent:'center',
+	  alignItems:'center',
+	  elevation:5
+	},
+	titleButton:{
+	  fontSize:18,
+	  color:'white'	
 	}	
 })
  
